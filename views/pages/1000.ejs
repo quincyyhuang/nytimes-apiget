@@ -1,0 +1,28 @@
+<!-- views/pages/1000.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include ../partials/head %>
+</head>
+<body class="container">
+
+    <header>
+        <% include ../partials/header %>
+    </header>
+
+    <main>
+            <div class="alert alert-danger" role="alert">
+                <h1>1000 Error</h1>
+                <h2>Sorry! What you request is not a readable article.</h2>
+                <h2>You can visit the original <a href='<%= url %>'>URL</a>.</h2>
+            </div>
+
+    </main>
+
+    <footer>
+        <% include ../partials/footer %>
+    </footer>
+
+</body>
+</html>

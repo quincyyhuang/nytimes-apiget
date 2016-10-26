@@ -1,0 +1,90 @@
+<!-- views/pages/search.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include ../partials/head %>
+</head>
+<body class="container">
+
+    <header>
+        <% include ../partials/header %>
+    </header>
+
+    <main>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8">
+            <%if (ifWrongInput) { %>
+              <div class="alert alert-danger alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <strong>Error</strong> Illegal input. Please try again.
+              </div>
+            <% } %>
+            <div class="alert alert-warning alert-dismissible" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <strong>Notice</strong> Article archives on NYTimes are not all free to read even if some of them are in the search result. <b>1851–1922</b>: <b>FREE</b>. <b>1923–1980</b>: <b>NOT</b> free.<b>1981–Present</b>: <b>FREE</b>.
+            </div>
+            <div class="panel panel-primary">
+              <div class="panel-heading">
+                <h3 class="panel-title">Customize your search</h3>
+              </div>
+              <div class="panel-body">
+                <form role="form" class="form-horizontal">
+                  <fieldset>
+                    <div class="form-group">
+                      <label for="text" class="col-lg-2 control-label">Search</label>
+                      <div class="col-lg-10">
+                        <input type="text" class="form-control" name="text" placeholder="Search Text">
+                        <p class="help-block"><b>Optional</b> Search Text will be searched in <b>headline</b>, <b>body</b> and <b>byline</b>.</p>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="bdate" class="col-lg-2 control-label">Begin date</label>
+                      <div class="col-lg-10">
+                        <input type="text" class="form-control" name="bdate" placeholder="Begin date">
+                        <p class="help-block"><b>Optional</b> Search for the articles after the date. Format: <b>YYYYMMDD</b>.</p>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="edate" class="col-lg-2 control-label">End date</label>
+                      <div class="col-lg-10">
+                        <input type="text" class="form-control" name="edate" placeholder="End date">
+                        <p class="help-block"><b>Optional</b> Search for the articles before the date. Format: <b>YYYYMMDD</b>.</p>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="sort" class="col-lg-2 control-label">Sort</label>
+                      <div class="col-lg-10">
+                        <select name="sort" class="form-control">
+                          <option value="relevant" selected="selected">No</option>
+                          <option value="newest">Newest</option>
+                          <option value="oldest">Oldest</option>
+                        </select>
+                        <p class="help-block"><b>Optional</b> Specify if results should be sorted. <b>Default</b>: Sorted by relevance.</p>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="col-lg-10 col-lg-offset-2">
+                        <button type="reset" class="btn btn-default">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                      </div>
+                    </div>
+                  </fieldset>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4"></div>
+        </div>
+      </div>
+
+    </main>
+
+    <footer>
+        <% include ../partials/footer %>
+    </footer>
+
+</body>
+</html>

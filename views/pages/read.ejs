@@ -1,0 +1,234 @@
+<!-- views/pages/read.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include ../partials/head %>
+</head>
+<body class="container">
+
+    <header>
+        <% include ../partials/header %>
+    </header>
+
+    <main>
+
+
+
+	    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-8">
+              <h1><u><%= type %></u> of <u><%= section %></u> in <u><%= period %></u></h1>
+              <div class="alert alert-warning alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <strong>Notice</strong> Columns under Article are ordinary articles but columns under Interactive are not. Interactive columns may require interactive behavior to make sense, which can be somewhat tricky. So note that Interactive columns may not be displayed correctly.
+              </div>
+              <div class="container visible-xs-block">
+                <div class="panel panel-primary">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">Customize</h3>
+                  </div>
+                  <div class="panel-body">
+                    <form role="form" class="form-horizontal" action="/read" method="get">
+                      <fieldset>
+                        <div class="form-group">
+                          <label for="type" class="col-lg-2 control-label">Type</label>
+                          <div class="col-lg-10">
+                            <select class="form-control" name="type">
+                              <option value="mostviewed" selected="selected">Most Viewed</option>
+                              <option value="mostemailed">Most Emailed</option>
+                              <option value="mostshared">Most Shared</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="section" class="col-lg-2 control-label">Section</label>
+                          <div class="col-lg-10">
+                            <select class="form-control" name="section">
+                              <option value="all-sections" selected="selected">all-sections</option>
+                              <option value="Arts">Arts</option>
+                              <option value="Automobiles">Automobiles</option>
+                              <option value="Blogs">Blogs</option>
+                              <option value="Books">Books</option>
+                              <option value="Business Day">Business Day</option>
+                              <option value="Education">Education</option>
+                              <option value="Fashion & Style">Fashion & Style</option>
+                              <option value="Food">Food</option>
+                              <option value="Health">Health</option>
+                              <option value="Job Market">Job Market</option>
+                              <option value="Magazine">Magazine</option>
+                              <option value="membercenter">membercenter</option>
+                              <option value="Movies">Movies</option>
+                              <option value="Multimedia">Multimedia</option>
+                              <option value="N.Y. / Region">N.Y. / Region</option>
+                              <option value="NYT Now">NYT Now</option>
+                              <option value="Obituaries">Obituaries</option>
+                              <option value="Open">Open</option>
+                              <option value="Opinion">Opinion</option>
+                              <option value="Public Editor">Public Editor</option>
+                              <option value="Real Estate">Real Estate</option>
+                              <option value="Science">Science</option>
+                              <option value="Sports">Sports</option>
+                              <option value="Style">Style</option>
+                              <option value="Sunday Review">Sunday Review</option>
+                              <option value="T Magazine">T Magazine</option>
+                              <option value="Technology">Technology</option>
+                              <option value="The Upshot">The Upshot</option>
+                              <option value="Theater">Theater</option>
+                              <option value="Times Insider">Times Insider</option>
+                              <option value="Today’s Paper">Today’s Paper</option>
+                              <option value="Travel">Travel</option>
+                              <option value="U.S.">U.S.</option>
+                              <option value="World">World</option>
+                              <option value="Your Money">Your Money</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="period" class="col-lg-2 control-label">Period</label>
+                          <div class="col-lg-10">
+                            <select class="form-control" name="period">
+                              <option value="1" selected="selected">Day</option>
+                              <option value="7">Week</option>
+                              <option value="30">Month</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <div class="col-lg-10 col-lg-offset-2">
+                            <button type="reset" class="btn btn-default">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                          </div>
+                        </div>
+                      </fieldset>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              <h2> <span class="label label-info"><i class="fa fa-book" aria-hidden="true"></i> Article</span> </h2>
+              <% artEntry.forEach(function(entry) { %>
+                <div class="well">
+                  <h2><a href='../article?id=<%= entry.id %>' target="_blank"><%= entry.title %></a></h2>
+                  <p><i><%= entry.abstract %></i></p>
+                  <hr>
+                  <p><span class="label label-default">Byline:</span> <u><%= entry.byline %></u></p>
+                  <span class="label label-success">Published Date: <b><%= entry.published_date %></b></span>
+                  <span class="label label-primary">Section: <%= entry.section %></span>
+                </div>
+              <% }); %>
+              <%if (interEntry.length > 0) { %>
+                <h2> <span class="label label-info"><i class="fa fa-exchange" aria-hidden="true"></i> Interactive</span> </h2>
+              <% } %>
+              <% interEntry.forEach(function(entry) { %>
+                <div class="well">
+                  <h2><a href='../article?id=<%= entry.id %>' target="_blank"><%= entry.title %></a></h2>
+                  <p><i><%= entry.abstract %></i></p>
+                  <hr>
+                  <p><span class="label label-default">Byline:</span> <u><%= entry.byline %></u></p>
+                  <span class="label label-success">Published Date: <b><%= entry.published_date %></b></span>
+                  <span class="label label-primary">Section: <%= entry.section %></span>
+                </div>
+              <% }); %>
+
+              <nav>
+                <ul class="pager">
+                  <% if(offset == 1){ %>
+                    <li  class="disabled"><a>Previous</a></li>
+                  <% } else{ %>
+                    <li><a href='/read?type=<%= t %>&section=<%= section %>&period=<%= p %>&offset=<%= (offset-2)*20 %>'>Previous</a></li>
+                  <% } %>
+                  <li>Page <%= offset %></li>
+                  <% if(nextpage){ %>
+                    <li><a href='/read?type=<%= t %>&section=<%= section %>&period=<%= p %>&offset=<%= offset*20 %>'>Next</a></li>
+                  <% } else{ %>
+                    <li class="disabled"><a>Next</a></li>
+                  <% } %>
+                </ul>
+              </nav>
+            </div>
+            <div class="col-xs-6 col-md-4 hidden-xs">
+              <form role="form" class="form-horizontal" action="/read" method="get">
+                <fieldset>
+                  <legend>Customize</legend>
+                  <div class="form-group">
+                    <label for="type" class="col-lg-2 control-label">Type</label>
+                    <div class="col-lg-10">
+                      <select class="form-control" name="type">
+                        <option value="mostviewed" selected="selected">Most Viewed</option>
+                        <option value="mostemailed">Most Emailed</option>
+                        <option value="mostshared">Most Shared</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="section" class="col-lg-2 control-label">Section</label>
+                    <div class="col-lg-10">
+                      <select class="form-control" name="section">
+                        <option value="all-sections" selected="selected">all-sections</option>
+                        <option value="Arts">Arts</option>
+                        <option value="Automobiles">Automobiles</option>
+                        <option value="Blogs">Blogs</option>
+                        <option value="Books">Books</option>
+                        <option value="Business Day">Business Day</option>
+                        <option value="Education">Education</option>
+                        <option value="Fashion & Style">Fashion & Style</option>
+                        <option value="Food">Food</option>
+                        <option value="Health">Health</option>
+                        <option value="Job Market">Job Market</option>
+                        <option value="Magazine">Magazine</option>
+                        <option value="membercenter">membercenter</option>
+                        <option value="Movies">Movies</option>
+                        <option value="Multimedia">Multimedia</option>
+                        <option value="N.Y. / Region">N.Y. / Region</option>
+                        <option value="NYT Now">NYT Now</option>
+                        <option value="Obituaries">Obituaries</option>
+                        <option value="Open">Open</option>
+                        <option value="Opinion">Opinion</option>
+                        <option value="Public Editor">Public Editor</option>
+                        <option value="Real Estate">Real Estate</option>
+                        <option value="Science">Science</option>
+                        <option value="Sports">Sports</option>
+                        <option value="Style">Style</option>
+                        <option value="Sunday Review">Sunday Review</option>
+                        <option value="T Magazine">T Magazine</option>
+                        <option value="Technology">Technology</option>
+                        <option value="The Upshot">The Upshot</option>
+                        <option value="Theater">Theater</option>
+                        <option value="Times Insider">Times Insider</option>
+                        <option value="Today’s Paper">Today’s Paper</option>
+                        <option value="Travel">Travel</option>
+                        <option value="U.S.">U.S.</option>
+                        <option value="World">World</option>
+                        <option value="Your Money">Your Money</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="period" class="col-lg-2 control-label">Period</label>
+                    <div class="col-lg-10">
+                      <select class="form-control" name="period">
+                        <option value="1" selected="selected">Day</option>
+                        <option value="7">Week</option>
+                        <option value="30">Month</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-lg-10 col-lg-offset-2">
+                      <button type="reset" class="btn btn-default">Cancel</button>
+                      <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                  </div>
+                </fieldset>
+              </form>
+              </div>
+            </div>
+          </div>
+    </main>
+
+    <footer>
+        <% include ../partials/footer %>
+    </footer>
+
+</body>
+</html>

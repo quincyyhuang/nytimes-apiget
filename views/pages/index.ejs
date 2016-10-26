@@ -1,0 +1,38 @@
+<!-- views/pages/index.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include ../partials/head %>
+</head>
+<body class="container">
+
+    <header>
+        <% include ../partials/header %>
+    </header>
+
+    <main>
+        <div class="jumbotron">
+            <h1>NYTimes Search Tool</h1>
+            <p>A tool to search and get articles on NYTimes.</p>
+        </div>
+	    <div class="container">
+        <h2>Introduction</h2>
+	      <p>Since NYTimes websites are inaccessible in China, this tool is made for English learners in China who want to read authentic articles from New York Times in order to improve their English skills. Also, this tool provides searching functions which enable users to search certain articles on NYTimes with specific keywords or options.</p>
+        <h2>Copyrights</h2>
+        <p>This site <b>DOES NOT</b> hold any form of content from New York Times, it only <b>DISPLAYS</b> the search responses. <b>Copyrights of the the search results and the articles are of The New York Times Company</b>.</p>
+	      <h2>Usage</h2>
+        <p>Due to the limitation on the daily number of requests that API is allowed to make, please do not make meaningless or repeated inquiries which may lead to a service interruption and inconvenience.</p>
+        <p>Academic uses are <b>recommended</b>. Other purposes are <b>deprecated</b>.</p>
+        <p><a class="btn btn-success btn-lg" href="/read"><i class="fa fa-book" aria-hidden="true"></i> ARTICLE</a> To read top articles from the New York Times.</p>
+        <p><a class="btn btn-success btn-lg" href="/search"><i class="fa fa-search" aria-hidden="true"></i> SEARCH</a> To make search inquiries on New York Times.</p>
+
+      </div>
+    </main>
+
+    <footer>
+        <% include ../partials/footer %>
+    </footer>
+
+</body>
+</html>

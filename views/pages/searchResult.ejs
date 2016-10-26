@@ -1,0 +1,65 @@
+<!-- views/pages/searchResult.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include ../partials/head %>
+</head>
+<body class="container">
+
+    <header>
+        <% include ../partials/header %>
+    </header>
+
+    <main>
+
+
+
+	    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-8">
+              <h1>Search: <u><%= text %></u> by <u><%= sort %></u></h1>
+              <h2> <span class="label label-info"><i class="fa fa-search" aria-hidden="true"></i> Results</span> </h2>
+              <% if(entries.length == 0){ %>
+                <h3>No result. <i class="fa fa-frown-o" aria-hidden="true"></i></h3>
+              <% } %>
+
+              <% entries.forEach(function(entry) { %>
+                <div class="well">
+                  <h2><a href='../article?id=<%= entry.id %>' target="_blank"><%= entry.title %></a></h2>
+                  <p><i><%= entry.lead_paragraph %></i></p>
+                  <hr>
+                  <p><span class="label label-default">Byline:</span> <u><%= entry.byline %></u></p>
+                  <span class="label label-success">Published Date: <b><%= entry.published_date %></b></span>
+                  <span class="label label-primary">Source: <%= entry.source %></span>
+                </div>
+              <% }); %>
+
+              <nav>
+                <ul class="pager">
+                  <% if(page == 0){ %>
+                    <li  class="disabled"><a>Previous</a></li>
+                  <% } else{ %>
+                    <li><a href='/search<%= query %>&page=<%= page-1 %>'>Previous</a></li>
+                  <% } %>
+                  <li>Page <%= page+1 %></li>
+                  <% if(nextpage){ %>
+                    <li><a href='/search<%= query %>&page=<%= page+1 %>'>Next</a></li>
+                  <% } else{ %>
+                    <li class="disabled"><a>Next</a></li>
+                  <% } %>
+                </ul>
+              </nav>
+
+            </div>
+            <div class="col-xs-6 col-md-4 hidden-xs"></div>
+            </div>
+          </div>
+    </main>
+
+    <footer>
+        <% include ../partials/footer %>
+    </footer>
+
+</body>
+</html>

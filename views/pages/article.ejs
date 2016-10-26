@@ -1,0 +1,69 @@
+<!-- views/pages/article.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include ../partials/head %>
+</head>
+<style>
+  .story-text {
+    font-size: 1.2em;
+    margin-bottom: 2em;
+  }
+</style>
+<body class="container">
+
+    <header>
+        <% include ../partials/header %>
+    </header>
+
+    <main>
+	    <div class="container">
+        <div class="row">
+          <div class="col-md-8">
+            <h1><%= title %></h1>
+          </div>
+          <div class="col-md-4"></div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-8 well">
+            <p><span class="label label-success">Published Date:</span> <b><%= date %></b> <span class="label label-primary">Section: <%= section %></span></p>
+            <p><span class="label label-default">Byline:</span> <%= byline %></p>
+            <p><span class="label label-danger">Source:</span> <%= source %></p>
+            <p><span class="label label-warning">Keywords:</span> <%= keywords %></p>
+            <p><span class="label label-default">URL:</span> <a href='<%= url %>' target="_blank"><%= url %></a></p>
+          </div>
+          <div class="col-md-4">
+          </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8 well">
+              <% if (readable == false) { %>
+                <h3>Sorry, this article is not free. <i class="fa fa-frown-o" aria-hidden="true"></i></h3>
+              <% } else if (isPDF == false) { %>
+                <% passage.forEach(function(p) { %>
+                  <p class="story-text"><%= p %></p>
+                <% }); %>
+              <% } else { %>
+                <h3>This is an old article.</h3>
+                <h3>Check the original <a href='<%= originalURL %>'>PDF</a> of this article.</h3>
+                <h3><a href='<%= cachedURL %>'>This</a> is a proxied URL for blocked users.</h3>
+                <div class="alert alert-danger" role="alert">
+                  <strong>Notice</strong> We don't cache any files from NYTimes. This is only a proxied URL which makes direct request to NYTimes for the PDF file.
+                </div>
+              <% } %>
+
+            </div>
+            <div class="col-md-4">
+
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <% include ../partials/footer %>
+    </footer>
+
+</body>
+</html>
