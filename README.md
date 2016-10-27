@@ -20,9 +20,13 @@ App is runing on heroku. https://nytimes-apiget.herokuapp.com/
 ## Installation
 `npm install` will set everything up.
 
+## Deployment
+Simply run `node server.js`. Default port is **8000** on localhost. Use web server to proxy to this port.
+
+PM2 Manager is recommended for production.
 
 ## Notes
-An API will be required to retrieve data.
+An API key will be required to retrieve data.
 
 Get one on [nytimes dev center](https://developer.nytimes.com/).
 
